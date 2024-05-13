@@ -17,12 +17,8 @@ export class BotEntranceScene {
     async onSceneEnter(context: MyContext): Promise<void> {
 
         const username = (await this.mongoService.findSession(context.from?.id))?.username
-        await context.reply(`Привет, ${username !== null ? username : context.message?.from?.username}\nПожалуйста напиши своё имя (Название компании)`);
-        if(await this.mongoService.findSession(context.from.id) !== null) { 
-            await this.mongoService.updateSession(context.from.id, context.message?.from?.username);
-        } else {
-            await this.mongoService.createSession(context.from.id, context.message?.from?.username);
-        }
+        await context.reply(`${username !== null ? username : context.message?.from?.username}\nПожалуйста напиши своё имя (Название компании)`);
+        
     }
 
 

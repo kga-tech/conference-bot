@@ -13,10 +13,7 @@ import { BotEntranceScene } from "./scenes/entrance.scene";
 import { BotUserTypeScene } from "./scenes/userType.scene";
 import { BotInformationScene } from "./scenes/information.scene";
 import { MongodbService } from "src/mongodb/mongodb.service";
-
-
-
-
+import { BotReasonScene } from "./scenes/reason.scene";
 
 
 @Module({
@@ -41,7 +38,8 @@ import { MongodbService } from "src/mongodb/mongodb.service";
         
         BotEntranceScene,
         BotUserTypeScene,
-        BotInformationScene
+        BotInformationScene,
+        BotReasonScene
     ],
 })
 

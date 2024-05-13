@@ -24,6 +24,9 @@ export class Information {
     @Prop({ default: '', required: false })
     description: string;
 
+    @Prop({required: false, default: ''})
+    reason: string;
+
 }
 
 export const InformationSchema = SchemaFactory.createForClass(Information);

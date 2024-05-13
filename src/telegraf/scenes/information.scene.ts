@@ -1,4 +1,4 @@
-import { BOT_ENTRANCE_SCENE, BOT_INFORMATION_SCENE, sessionConstants } from "../sceneConstants/telegraf.constants";
+import { BOT_ENTRANCE_SCENE, BOT_INFORMATION_SCENE, BOT_REASON_SCENE, sessionConstants } from "../sceneConstants/telegraf.constants";
 import { Hears, On, Scene, SceneEnter, SceneLeave } from "nestjs-telegraf";
 import { MyContext } from "../interfaces/context.interface";
 import { Markup, deunionize } from "telegraf";
@@ -21,7 +21,7 @@ export class BotInformationScene {
 
     @Hears('Изменить данные')
     async onHearsChangeData(context: MyContext) {
-        await context.scene.enter(BOT_ENTRANCE_SCENE);
+        await context.scene.enter(BOT_REASON_SCENE);
     }
     @On('text')
     async onUserMessage(context: MyContext): Promise<void> {

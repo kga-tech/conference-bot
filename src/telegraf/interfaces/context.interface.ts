@@ -16,6 +16,11 @@ export enum ObjectType {
     Misc = "Другое",
 }
 
+export enum ReasonType {
+    Local = "Личная встреча",
+    Contacts = "Оставить контакты"
+}
+
 interface MySceneSession extends Scenes.SceneSessionData {
     mySceneSessionProps: IBotParams;
 }

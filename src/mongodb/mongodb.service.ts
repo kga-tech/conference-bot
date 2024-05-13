@@ -41,4 +41,12 @@ export class MongodbService {
         return await this.Model.findOneAndUpdate({user_id: sessionID}, { description: _description });
     }
 
+    async updateReason(sessionID: number, _reason: string): Promise<Information> {
+        return await this.Model.findOneAndUpdate({user_id: sessionID}, { reason: _reason });
+    }
+
+    async deleteRecord(ObjectId): Promise<void> {
+        return await this.Model.findByIdAndDelete({ _id: ObjectId })
+    }
+
 }
