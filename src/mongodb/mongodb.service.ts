@@ -13,11 +13,14 @@ export class MongodbService {
         return await this.Model.findOne({ user_id: sessionId });
     }
 
-    async createSession(sessionID: number): Promise<Information> {
-        return await this.Model.create({ user_id: sessionID })
+    async createSession(sessionID: number, _username: string): Promise<Information> {
+        return await this.Model.create({ user_id: sessionID, username: _username });
     }
 
-    
+    async updateSession(sessionID: number, _username: string): Promise<Information> {
+        return await this.Model.findOneAndUpdate({ user_id: sessionID }, { username: _username });
+    }
+
     async updateName(sessionID: number, name: string): Promise<Information> {
         return await this.Model.findOneAndUpdate({ user_id: sessionID }, { name: name });
     }

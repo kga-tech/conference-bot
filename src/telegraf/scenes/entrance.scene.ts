@@ -16,12 +16,12 @@ export class BotEntranceScene {
     @SceneEnter()
     async onSceneEnter(context: MyContext): Promise<void> {
 
-        // console.log('dataContext -> ', dataContext.session);
-        await context.reply(`Привет, ${context.message?.from?.username}\nПожалуйста напиши свое имя(название компании)`);
+        const username = (await this.mongoService.findSession(context.from?.id))?.username
+        await context.reply(`Привет, ${username !== null ? username : context.message?.from?.username}\nПожалуйста напиши своё имя (Название компании)`);
         if(await this.mongoService.findSession(context.from.id) !== null) { 
-            console.log('Session found')
+            await this.mongoService.updateSession(context.from.id, context.message?.from?.username);
         } else {
-            await this.mongoService.createSession(context.from.id);
+            await this.mongoService.createSession(context.from.id, context.message?.from?.username);
         }
     }
 

@@ -12,6 +12,9 @@ export class Information {
     @Prop({ required: true })
     user_id: number;
 
+    @Prop({ required: true, default: '' })
+    username: string;
+
     @Prop({ default: '', required: false })
     name: string;
 
