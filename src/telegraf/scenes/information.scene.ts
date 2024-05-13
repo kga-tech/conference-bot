@@ -1,7 +1,7 @@
-import { BOT_INFORMATION_SCENE, sessionConstants } from "../sceneConstants/telegraf.constants";
-import { On, Scene, SceneEnter } from "nestjs-telegraf";
+import { BOT_ENTRANCE_SCENE, BOT_INFORMATION_SCENE, sessionConstants } from "../sceneConstants/telegraf.constants";
+import { Hears, On, Scene, SceneEnter } from "nestjs-telegraf";
 import { MyContext } from "../interfaces/context.interface";
-import { deunionize } from "telegraf";
+import { Markup, deunionize } from "telegraf";
 import { MongodbService } from "src/mongodb/mongodb.service";
 
 
@@ -27,10 +27,17 @@ export class BotInformationScene {
         const description = await deunionize(context.message).text;
 
         await this.mongoService.updateDescription(context.from.id, description);
-
+        
         await context.reply('Спасибо за отклик!\nСкоро мы свяжемся с тобой...');
         await context.reply('Пока ты можешь ознакомиться с нашим сайтом: https://lidera.agency');
+        await context.reply(`Если нужно изменить данные, нажми кнопку ниже`, Markup.keyboard(['Изменить данные']).oneTime());
 
+    }
+
+
+    @Hears('Изменить данные')
+    async onHearsChangeData(context: MyContext): Promise<void> {
+        await context.scene.enter(BOT_ENTRANCE_SCENE);
     }
 
 }
