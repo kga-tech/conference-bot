@@ -1,5 +1,5 @@
 import { BOT_ENTRANCE_SCENE, BOT_INFORMATION_SCENE, sessionConstants } from "../sceneConstants/telegraf.constants";
-import { Hears, On, Scene, SceneEnter } from "nestjs-telegraf";
+import { Hears, On, Scene, SceneEnter, SceneLeave } from "nestjs-telegraf";
 import { MyContext } from "../interfaces/context.interface";
 import { Markup, deunionize } from "telegraf";
 import { MongodbService } from "src/mongodb/mongodb.service";
@@ -19,6 +19,10 @@ export class BotInformationScene {
         await context.reply("Расскажите о себе (Чем занимаешься / Что предлагаешь)");
     }
 
+    @Hears('Изменить данные')
+    async onHearsChangeData(context: MyContext) {
+        await context.scene.enter(BOT_ENTRANCE_SCENE);
+    }
     @On('text')
     async onUserMessage(context: MyContext): Promise<void> {
         
@@ -30,14 +34,8 @@ export class BotInformationScene {
         
         await context.reply('Спасибо за отклик!\nСкоро мы свяжемся с тобой...');
         await context.reply('Пока ты можешь ознакомиться с нашим сайтом: https://lidera.agency');
-        await context.reply(`Если нужно изменить данные, нажми кнопку ниже`, Markup.inlineKeyboard([Markup.button.callback('Изменить данные', 'Some data')]));
+        await context.reply(`Если нужно изменить данные, нажми кнопку ниже`, Markup.keyboard(['Изменить данные']).oneTime());
 
-    }
-
-    @On('callback_query')
-    async handleCallback(context: MyContext): Promise<void> {
-        await context.answerCbQuery();
-        context.scene.enter(BOT_ENTRANCE_SCENE);
     }
 
 }

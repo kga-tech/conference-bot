@@ -29,6 +29,7 @@ export class BotEntranceScene {
     @On('text')
     async OnTextInformation(context: MyContext): Promise<void> {
 
+        console.log('we are here')
 
         const name: string = await deunionize(context.message).text;
 
