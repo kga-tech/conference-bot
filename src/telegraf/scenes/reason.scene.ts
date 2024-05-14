@@ -16,7 +16,7 @@ export class BotReasonScene {
     @SceneEnter()
     async onSceneEnter(context: MyContext): Promise<void> {
 
-        await context.reply(`Привет!\nВыбери опцию ниже`, Markup.keyboard([['Хочу оставить свои контакты', 'Хочу получить личную встречу с овнером'], ["Хочу перейти на сайт"]]).oneTime());
+        await context.reply(`Привет!\nВыбери опцию ниже`, Markup.keyboard([['Хочу оставить свои контакты', 'Хочу получить личную встречу с овнером'], ["Хочу перейти на сайт"]]).resize(true).oneTime());
 
         if(await this.mongoService.findSession(context.from.id) !== null) { 
             await this.mongoService.updateSession(context.from.id, context.message?.from?.username);

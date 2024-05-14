@@ -34,7 +34,7 @@ export class BotInformationScene {
         
         await context.reply('Спасибо за отклик!\nСкоро мы свяжемся с тобой...');
         await context.reply('Пока ты можешь ознакомиться с нашим сайтом: https://lidera.agency');
-        await context.reply(`Если нужно изменить данные, нажми кнопку ниже`, Markup.keyboard(['Изменить данные']).oneTime());
+        await context.reply(`Если нужно изменить данные, нажми кнопку ниже`, Markup.keyboard(['Изменить данные']).resize(true).oneTime());
 
     }
 
