@@ -18,7 +18,7 @@ export class BotUserTypeScene {
     async onSceneEnter(context: MyContext): Promise<void> {
 
         const name: string = (await this.mongoService.findName(context.from.id)).name;
-        await context.reply(`${name},\nПожалуйста, расскажи нам кто ты:`, Markup.keyboard(['Рекламодатель', 'Партнерская сеть', 'Media-buyer', 'Owner команды', 'Другое']).resize(true).oneTime());
+        await context.reply(`${name},\nРасскажи, в качестве кого ты выступаешь:`, Markup.keyboard(['Рекламодатель', 'Партнерская сеть', 'Media-buyer', 'Owner команды', 'Другое']).resize(true).oneTime());
 
     }
 
