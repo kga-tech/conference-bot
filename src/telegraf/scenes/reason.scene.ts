@@ -19,7 +19,7 @@ export class BotReasonScene {
 
         await context.reply(message, { parse_mode: 'MarkdownV2', reply_markup: { 
             keyboard: [
-                ["Хочу получить личную встречу"],
+                ["Хочу на личную встречу"],
                 ["Хочу перейти на сайт"],
                 ["Хочу связаться позже"],
             ],
@@ -42,7 +42,7 @@ export class BotReasonScene {
         await context.scene.enter(BOT_ENTRANCE_SCENE);
     }
 
-    @Hears('Хочу получить личную встречу')
+    @Hears('Хочу на личную встречу')
     async onHearsOwnerMeet(context: MyContext) {
         await this.mongoService.updateReason(context.from.id, ReasonType.Local);
         await context.scene.enter(BOT_ENTRANCE_SCENE);
