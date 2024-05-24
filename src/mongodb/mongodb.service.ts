@@ -10,7 +10,9 @@ export class MongodbService {
 
 
     async findSession(sessionId: number): Promise<Information> {
-        return await this.Model.findOne({ user_id: sessionId });
+        return await this.Model.findOne({ user_id: sessionId })
+        .select("-__v")
+        .select("-_id");
     }
 
     async createSession(sessionID: number, _username: string): Promise<Information> {

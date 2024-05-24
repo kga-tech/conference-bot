@@ -1,5 +1,5 @@
 import { BOT_INFORMATION_SCENE, BOT_USERTYPE_SCENE, sessionConstants } from "../sceneConstants/telegraf.constants";
-import { Hears, Scene, SceneEnter } from "nestjs-telegraf";
+import { Hears, Scene, SceneEnter, On } from "nestjs-telegraf";
 import { MyContext } from "../interfaces/context.interface";
 import { ObjectType } from "../interfaces/context.interface";
 import { Markup } from "telegraf";
@@ -46,6 +46,12 @@ export class BotUserTypeScene {
     }
     @Hears('Другое')
     async onHearsMisc(context: MyContext): Promise<void> {
+        await this.mongoService.updateUserType(context.from.id, ObjectType.Misc);
+        await context.scene.enter(BOT_INFORMATION_SCENE);
+    }
+
+    @On('text')
+    async OnHearsText(context: MyContext): Promise<void> {
         await this.mongoService.updateUserType(context.from.id, ObjectType.Misc);
         await context.scene.enter(BOT_INFORMATION_SCENE);
     }

@@ -27,11 +27,11 @@ export class BotInformationScene {
     async onUserMessage(context: MyContext): Promise<void> {
         
         
-
         const description = await deunionize(context.message).text;
-
-        await this.mongoService.updateDescription(context.from.id, description);
         
+        await this.mongoService.updateDescription(context.from.id, description);
+        const data = await this.mongoService.findSession(context.from?.id);
+        await context.telegram.sendMessage("-1002190050172", data as any);
         await context.reply('Спасибо!\n\nНам потребуется немного времени, чтобы обработать  запрос.\n\nЕсли ты тот, кто нам нужен, мы с тобой свяжемся🤝');
         await context.reply('А пока что, ты можешь узнать о нас больше на сайте: https://lidera.agency');
         await context.reply(`Если нужно изменить данные, нажми кнопку ниже`, Markup.keyboard(['Изменить данные']).resize(true).oneTime());

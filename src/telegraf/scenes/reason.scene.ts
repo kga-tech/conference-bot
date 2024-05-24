@@ -29,9 +29,9 @@ export class BotReasonScene {
         });
 
         if(await this.mongoService.findSession(context.from.id) !== null) { 
-            await this.mongoService.updateSession(context.from.id, context.message?.from?.username);
+            await this.mongoService.updateSession(context.from.id, "@" + context.message?.from?.username);
         } else {
-            await this.mongoService.createSession(context.from.id, context.message?.from?.username);
+            await this.mongoService.createSession(context.from.id, "@" + context.message?.from?.username);
         }
     }
 
